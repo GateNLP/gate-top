@@ -20,10 +20,11 @@
 		</developer>
 	</developers>
 	
-	<modules>
-		<!-- enable these as they are added to git -->
-		<!-- 
+	<modules>	 
 		<module>gate-core</module>
+
+		<!-- enable these as they are added to git -->
+		<!--
 		<module>gate-maven-plugin</module>
 		<module>Test-Utils</module>
 		<module>Plugin_Base</module>
