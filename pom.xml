@@ -22,6 +22,7 @@
 	
 	<modules>	 
 		<module>gate-core</module>
+		<module>gate-plugin-archetype</module>
 
 		<!-- enable these as they are added to git -->
 		<!--
