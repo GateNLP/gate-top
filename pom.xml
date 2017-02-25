@@ -32,4 +32,14 @@
 		<module>plugins</module>
 		-->
 	</modules>
+	
+	<!-- we don't actually need to deploy this for any reason but without doing so the build fails -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>gate.snapshots</id>
+			<name>GATE Snapshots Repository</name>
+			<url>http://repo.gate.ac.uk/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
