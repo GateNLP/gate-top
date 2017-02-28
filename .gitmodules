@@ -7,3 +7,6 @@
 [submodule "gate-plugin-test-utils"]
 	path = gate-plugin-test-utils
 	url = https://github.com/GateNLP/gate-plugin-test-utils.git
+[submodule "gate-maven-plugin"]
+	path = gate-maven-plugin
+	url = https://github.com/GateNLP/gate-maven-plugin.git
