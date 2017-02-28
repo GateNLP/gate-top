@@ -4,3 +4,6 @@
 [submodule "gate-plugin-archetype"]
 	path = gate-plugin-archetype
 	url = https://github.com/GateNLP/gate-plugin-archetype.git
+[submodule "gate-plugin-test-utils"]
+	path = gate-plugin-test-utils
+	url = https://github.com/GateNLP/gate-plugin-test-utils.git
