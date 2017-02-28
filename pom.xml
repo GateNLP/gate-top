@@ -25,12 +25,7 @@
 		<module>gate-maven-plugin</module>
 		<module>gate-plugin-archetype</module>
 		<module>gate-plugin-test-utils</module>
-
-		<!-- enable these as they are added to git -->
-		<!--
-		<module>Plugin_Base</module>
-		<module>plugins</module>
-		-->
+		<module>gate-plugin-base</module>
 	</modules>
 	
 	<!-- we don't actually need to deploy this for any reason but without doing so the build fails -->

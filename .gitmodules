@@ -10,3 +10,6 @@
 [submodule "gate-maven-plugin"]
 	path = gate-maven-plugin
 	url = https://github.com/GateNLP/gate-maven-plugin.git
+[submodule "gate-plugin-base"]
+	path = gate-plugin-base
+	url = https://github.com/GateNLP/gate-plugin-base.git
