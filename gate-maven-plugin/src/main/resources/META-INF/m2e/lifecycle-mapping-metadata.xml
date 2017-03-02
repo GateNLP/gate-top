@@ -1,0 +1,14 @@
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <goals>
+          <goal>DumpCreoleToXML</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <ignore></ignore>
+      </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
