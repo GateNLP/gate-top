@@ -1,15 +1,3 @@
 [submodule "gate-core"]
 	path = gate-core
 	url = https://github.com/GateNLP/gate-core.git
-[submodule "gate-plugin-archetype"]
-	path = gate-plugin-archetype
-	url = https://github.com/GateNLP/gate-plugin-archetype.git
-[submodule "gate-plugin-test-utils"]
-	path = gate-plugin-test-utils
-	url = https://github.com/GateNLP/gate-plugin-test-utils.git
-[submodule "gate-maven-plugin"]
-	path = gate-maven-plugin
-	url = https://github.com/GateNLP/gate-maven-plugin.git
-[submodule "gate-plugin-base"]
-	path = gate-plugin-base
-	url = https://github.com/GateNLP/gate-plugin-base.git
