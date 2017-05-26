@@ -24,7 +24,7 @@
 
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
-			<artifactId>test-utils</artifactId>
+			<artifactId>gate-plugin-test-utils</artifactId>
 			<version>8.5-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
