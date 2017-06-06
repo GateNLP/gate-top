@@ -3,11 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-base</artifactId>
@@ -64,18 +62,32 @@
 
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+					<compilerArgs>
+						<arg>-Xlint:all</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>uk.ac.gate</groupId>
 				<artifactId>gate-maven-plugin</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<executions>
-          			<execution>
-	            		<phase>process-classes</phase>
-	            		<goals>
-	              			<goal>DumpCreoleToXML</goal>
-	            		</goals>
-          			</execution>
-        		</executions>
-        		
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>DumpCreoleToXML</goal>
+						</goals>
+					</execution>
+				</executions>
+
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -105,7 +117,7 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
-            					<phase>package</phase>
+						<phase>package</phase>
 						<configuration>
 							<classifier>creole</classifier>
 							<includes>
@@ -126,10 +138,10 @@
 				<version>2.19.1</version>
 			</plugin>
 			<plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-dependency-plugin</artifactId>
-    			<version>2.4</version>
-    		</plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -142,7 +154,7 @@
 						<!-- exclude auto-generated files -->
 						<exclude>**/svg/**/*</exclude>
 					</excludes>
-					
+
 					<!-- for now ignore issues with default encoding -->
 					<omitVisitors>DefaultEncodingDetector</omitVisitors>
 				</configuration>
@@ -176,8 +188,8 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
 				<configuration>
-					<!-- in theory we should only need one of these and it would be nice to get
-						rid of them alltogether but that's for another day -->
+					<!-- in theory we should only need one of these and it would be nice 
+						to get rid of them alltogether but that's for another day -->
 					<failOnError>false</failOnError>
 					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
