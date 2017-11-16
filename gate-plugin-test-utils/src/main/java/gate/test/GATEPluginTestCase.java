@@ -17,6 +17,7 @@ package gate.test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
@@ -32,6 +33,7 @@ import gate.Gate.ResourceInfo;
 import gate.creole.Plugin;
 import gate.util.Files;
 import gate.util.asm.ClassReader;
+import gate.creole.ResourceInstantiationException;
 import junit.framework.TestCase;
 
 public class GATEPluginTestCase extends TestCase {
@@ -48,13 +50,19 @@ public class GATEPluginTestCase extends TestCase {
 			Gate.init();
 		}
 
-		URL url = GATEPluginTestCase.class.getResource("/creole.xml");
-
+		URL creoleUrl = GATEPluginTestCase.class.getResource("/creole.xml");
+		if(creoleUrl == null) {
+		  throw new ResourceInstantiationException("Could not load plugin, creole.xml not found");
+		}
 		Properties properties = new Properties();
-		properties.load(GATEPluginTestCase.class.getResource("/creole.properties")
-				.openStream());
+		URL propsUrl = GATEPluginTestCase.class.getResource("/creole.properties");
+		if(propsUrl == null) {
+		  throw new ResourceInstantiationException("Could not load plugin, creole.properties not found");
+		}
+		InputStream propsStream = propsUrl.openStream();
+		properties.load(propsStream);
 
-		Plugin plugin = new PluginUnderTest(Files.fileFromURL(url),
+		Plugin plugin = new PluginUnderTest(Files.fileFromURL(creoleUrl),
 				properties.getProperty("groupId"),
 				properties.getProperty("artifactId"),
 				properties.getProperty("version"));
