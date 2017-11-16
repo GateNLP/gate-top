@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 public class GATEPluginTests {
 
   @BeforeClass
-  public void loadPluginUnderTest() throws Exception {
+  public static void loadPluginUnderTest() throws Exception {
     GATEPluginTestCase.loadPlugin();
   }
 }
