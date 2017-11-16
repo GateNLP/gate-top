@@ -36,18 +36,22 @@ import junit.framework.TestCase;
 
 public class GATEPluginTestCase extends TestCase {
 
-	@Override
-	public void setUp() throws Exception {
+  @Override
+  public void setUp() throws Exception {
+    loadPlugin();
+  }
+  
+	protected static void loadPlugin() throws Exception {
 
 		if (!Gate.isInitialised()) {
 			Gate.runInSandbox(true);
 			Gate.init();
 		}
 
-		URL url = this.getClass().getResource("/creole.xml");
+		URL url = GATEPluginTestCase.class.getResource("/creole.xml");
 
 		Properties properties = new Properties();
-		properties.load(this.getClass().getResource("/creole.properties")
+		properties.load(GATEPluginTestCase.class.getResource("/creole.properties")
 				.openStream());
 
 		Plugin plugin = new PluginUnderTest(Files.fileFromURL(url),
@@ -60,7 +64,7 @@ public class GATEPluginTestCase extends TestCase {
 		}
 	}
 
-	class PluginUnderTest extends Plugin.Maven {
+	static class PluginUnderTest extends Plugin.Maven {
 
     private static final long serialVersionUID = -7173026992962397847L;
 
