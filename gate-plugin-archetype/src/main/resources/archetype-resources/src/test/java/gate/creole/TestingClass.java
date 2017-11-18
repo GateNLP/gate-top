@@ -12,7 +12,7 @@ import gate.test.GappLoadingTestCase;
  * NOTE: please move/copy this class to the correct package for your plugin!
  
  */
-public class GappLoadingTest extends GappLoadingTestCase {
+public class TestingClass extends GATEPluginTests {
 
   @Test
   public void testSomething() {
