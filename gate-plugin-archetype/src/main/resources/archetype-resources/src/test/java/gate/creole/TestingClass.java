@@ -1,6 +1,9 @@
 package gate.creole;
 
-import gate.test.GappLoadingTestCase;
+import gate.test.GATEPluginTests;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 /**
  * Using this class automatically prepares GATE and the plugin for testing.
