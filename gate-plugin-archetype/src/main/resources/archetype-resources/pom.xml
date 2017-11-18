@@ -51,5 +51,10 @@
          Any other GATE plugins this plugin depends on at compile time should 
          add "<scope>provided</scope>" 
     -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
   </dependencies>
 </project>
