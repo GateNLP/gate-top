@@ -1,37 +1,55 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>uk.ac.gate</groupId>
+    <artifactId>gate-plugin-base</artifactId>
+    <!-- The version of GATE you wish to build against -->
+    <version>8.5-SNAPSHOT</version>
+    <!-- This forces the parent to always be resolved from the repo -->
+    <relativePath/>
+  </parent>
 
-	<modelVersion>4.0.0</modelVersion>
+  <!-- The Maven coordinates of this plugin -->
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
 
-	<parent>
-		<groupId>uk.ac.gate</groupId>
-		<artifactId>gate-plugin-base</artifactId>
-		<!-- this should be the version of GATE you wish to build against -->
-		<version>8.5-SNAPSHOT</version>
+  <!-- Information about this plugin.
+       This will be used when the plugin is shown in the GATE plugin manager
+  -->
 
-		<!-- this forces the parent to always be resolved from the repo -->
-		<relativePath></relativePath>
-	</parent>
+  <!-- Add a descriptive short name of the plugin -->
+  <name>${groupId}/${artifactId}</name>
 
-	<!-- this is the description of this plugin -->
-	<groupId>${groupId}</groupId>
-	<artifactId>${artifactId}</artifactId>
-	<version>${version}</version>
+  <!-- Add a description of what the plugin does or can be used for.
+       Do not include the list of processing or language resources, this will
+       be determined automatically. About one or two paragraphs.
+  -->
+  <description></description>
 
-	<licenses>
-		<license>
-			<!-- this is the license we usually use for plugins but feel free to change 
-				this if you feel a different license would be more suitable for your plugin -->
-			<name>GNU Lesser General Public License (LGPL), Version 3</name>
-			<url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <!-- Add the URL of the plugin's user-oriented web page -->
+  <url></url> 
 
-	<dependencies>
-		<!-- add any other libraries your plugin depends on. Any other GATE plugins 
-			you depend on at compile time should use the provided scope -->
-	</dependencies>
+  <licenses>
+    <license>
+      <!-- The license used for most GATE plugins and components.
+           Replace with any other license which is compatible with the licenses
+           of all the software and libraries this plugin depends on.
+      -->
+      <name>GNU Lesser General Public License (LGPL), Version 3</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
+  <dependencies>
+    <!-- Add the Maven coordinates of all libraries this plugin depends on.
+         The site https://search.maven.org/ can be used to search for libraries
+         and copy-paste the XML.
+         Any other GATE plugins this plugin depends on at compile time should 
+         add "<scope>provided</scope>" 
+    -->
+  </dependencies>
 </project>
