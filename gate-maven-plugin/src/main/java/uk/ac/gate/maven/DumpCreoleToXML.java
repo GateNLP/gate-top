@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -220,7 +221,7 @@ public class DumpCreoleToXML extends AbstractMojo {
           // ... if it's a class file convert the path to a classname
           String className = file.getAbsolutePath().substring(prefix);
           className =
-              className.substring(0, className.length() - 6).replaceAll(Strings.getFileSep(), ".");
+              className.substring(0, className.length() - 6).replaceAll(Pattern.quote(Strings.getFileSep()), ".");
 
           // access the class so we can extract any annotations etc. from it
           ClassReader classReader = new ClassReader(new FileInputStream(file));
