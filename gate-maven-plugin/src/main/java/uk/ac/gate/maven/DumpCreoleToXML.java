@@ -42,6 +42,7 @@ import gate.Gate.ResourceInfo;
 import gate.creole.Plugin;
 import gate.creole.CreoleAnnotationHandler;
 import gate.util.GateClassLoader;
+import gate.util.Strings;
 import gate.util.asm.ClassReader;
 
 /**
@@ -219,7 +220,7 @@ public class DumpCreoleToXML extends AbstractMojo {
           // ... if it's a class file convert the path to a classname
           String className = file.getAbsolutePath().substring(prefix);
           className =
-              className.substring(0, className.length() - 6).replace('/', '.');
+              className.substring(0, className.length() - 6).replaceAll(Strings.getFileSep(), ".");
 
           // access the class so we can extract any annotations etc. from it
           ClassReader classReader = new ClassReader(new FileInputStream(file));
