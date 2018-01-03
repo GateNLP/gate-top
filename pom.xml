@@ -21,7 +21,6 @@
 	</developers>
 	
 	<modules>	 
-		<module>gate-core</module>
 		<module>gate-maven-plugin</module>
 		<module>gate-plugin-archetype</module>
 		<module>gate-plugin-test-utils</module>
