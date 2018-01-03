@@ -150,6 +150,7 @@
 							<classifier>creole</classifier>
 							<includes>
 								<include>META-INF/gate/creole.xml</include>
+								<include>resources</include>
 							</includes>
 						</configuration>
 					</execution>
