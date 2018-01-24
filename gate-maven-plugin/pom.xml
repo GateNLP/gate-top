@@ -61,4 +61,14 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<build>
+		<plugins>
+			<plugin>
+				<!-- required to allow lambdas in gate-core -->
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.3</version>
+
+			</plugin>
+		</plugins>
+	</build>
 </project>
