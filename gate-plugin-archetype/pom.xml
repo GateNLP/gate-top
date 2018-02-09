@@ -8,6 +8,21 @@
 	<version>8.5-alpha1</version>
 	
 	<name>GATE Plugin Archetype</name>
+        <description>Maven archetype to create a new GATE plugin project.</description>
+	<url>http://gate.ac.uk/</url>
+
+	<organization>
+		<name>GATE</name>
+		<url>http://gate.ac.uk</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>gate-team</id>
+			<name>GATE Team</name>
+			<email>gate-developers@lists.sourceforge.net</email>
+		</developer>
+	</developers>
 
 	<licenses>
 		<license>
@@ -17,6 +32,12 @@
 		</license>
 	</licenses>
 	
+	<scm>
+		<connection>scm:git:git://github.com/GateNLP/gate-top.git</connection>
+		<developerConnection>scm:git:git@github.com:GateNLP/gate-top.git</developerConnection>
+		<url>https://github.com/GateNLP/gate-top</url>
+	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>gate-oss</id>

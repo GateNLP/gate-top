@@ -4,6 +4,10 @@
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-test-utils</artifactId>
 	<version>8.5-alpha1</version>
+
+        <name>GATE plugin testing utilities</name>
+        <description>A set of utilities to assist in testing GATE plugins.</description>
+	<url>http://gate.ac.uk/</url>
 	
 	<licenses>
 		<license>
@@ -25,6 +29,12 @@
 			<email>gate-developers@lists.sourceforge.net</email>
 		</developer>
 	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/GateNLP/gate-top.git</connection>
+		<developerConnection>scm:git:git@github.com:GateNLP/gate-top.git</developerConnection>
+		<url>https://github.com/GateNLP/gate-top</url>
+	</scm>
 
 	<dependencies>
 		<dependency>
