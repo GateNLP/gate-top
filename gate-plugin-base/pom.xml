@@ -125,7 +125,7 @@
 			<plugin>
 				<groupId>uk.ac.gate</groupId>
 				<artifactId>gate-maven-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>8.5-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
