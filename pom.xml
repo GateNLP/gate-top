@@ -27,13 +27,14 @@
 		<module>gate-plugin-base</module>
 	</modules>
 	
-	<!-- we don't actually need to deploy this for any reason but without doing so the build fails -->
-	<distributionManagement>
-		<snapshotRepository>
-			<id>gate.snapshots</id>
-			<name>GATE Snapshots Repository</name>
-			<url>https://repo.gate.ac.uk/content/repositories/snapshots</url>
-			<layout>default</layout>
-		</snapshotRepository>
-	</distributionManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
