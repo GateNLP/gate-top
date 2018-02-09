@@ -29,30 +29,6 @@
 
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>gate.ac.uk</id>
-			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>omtd-snapshots</id>
-			<name>OpenMinTed Snapshot Repository</name>
-			<url>https://repo.openminted.eu/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
-			<id>gate.ac.uk</id>
-			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 		<testResources>
 			<!-- this adds the maven coordinates into the test resource file creole.properties 
@@ -94,7 +70,7 @@
 			<plugin>
 				<groupId>uk.ac.gate</groupId>
 				<artifactId>gate-maven-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>8.5-alpha1</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
