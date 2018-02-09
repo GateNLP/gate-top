@@ -5,7 +5,7 @@
 	
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-archetype</artifactId>
-	<version>8.5-SNAPSHOT</version>
+	<version>8.5-alpha1</version>
 	
 	<name>GATE Plugin Archetype</name>
 
