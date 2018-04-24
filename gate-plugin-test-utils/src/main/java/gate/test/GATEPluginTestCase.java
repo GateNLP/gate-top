@@ -85,6 +85,17 @@ public class GATEPluginTestCase extends TestCase {
 			this.baseURL = (new URL(creoleFile.toURI().toURL(), "."));
 		}
 
+		/**
+		 * Ignore all the clever handling of -creole.jar in normal Maven plugins
+		 * and just delegate back to the standard getCreoleXML()
+		 * @return the parsed creole.xml from the plugin under test.
+		 * @throws Exception if anything goes wrong during parsing
+		 */
+		@Override
+		public Document getMetadataXML() throws Exception {
+			return getCreoleXML();
+		}
+
 		@Override
 		public Document getCreoleXML() throws Exception {
 			SAXBuilder builder = new SAXBuilder(false);
