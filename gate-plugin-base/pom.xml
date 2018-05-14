@@ -72,14 +72,6 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>omtd-snapshots</id>
-			<name>OpenMinTed Snapshot Repository</name>
-			<url>https://repo.openminted.eu/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
 			<id>gate.ac.uk</id>
 			<name>GATE Development Repository</name>
 			<url>http://repo.gate.ac.uk/content/groups/public/</url>
@@ -135,19 +127,24 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
+			<plugin>
 				<groupId>eu.openminted.share.annotations</groupId>
 				<artifactId>omtd-share-annotations-maven-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>3.0.2.6</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
+						<inherited>true</inherited>
 					</execution>
 				</executions>
-			</plugin>-->
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<inherited>false</inherited>
+			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
