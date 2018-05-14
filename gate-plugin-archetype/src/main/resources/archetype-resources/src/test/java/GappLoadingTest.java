@@ -1,4 +1,4 @@
-package gate.creole;
+package ${package};
 
 import gate.test.GappLoadingTestCase;
 
@@ -8,8 +8,6 @@ import gate.test.GappLoadingTestCase;
  * This class automatically tries to load all pipelines (any file with an 
  * extension ".gapp" or ".xgapp") which reside
  * in the main/resources/resources directory tree.
- * 
- * NOTE: please move/copy this class to the correct package for your plugin!
  */
 public class GappLoadingTest extends GappLoadingTestCase {
   

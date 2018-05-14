@@ -1,4 +1,4 @@
-package gate.creole;
+package ${package};
 
 import gate.test.GATEPluginTests;
 import org.junit.Test;
@@ -12,8 +12,6 @@ import static org.junit.Assert.*;
  * Any method in this class with the "@Test" annotation will then get
  * run with the plugin already properly loaded.
  * 
- * NOTE: please move/copy this class to the correct package for your plugin!
- 
  */
 public class TestingClass extends GATEPluginTests {
 

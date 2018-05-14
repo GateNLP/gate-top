@@ -5,8 +5,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="gate-plugin-archetype">
 
 	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/test/java</directory>
+		</fileSet>
+
 		<fileSet filtered="false" packaged="false" encoding="UTF-8">
-			<directory>src/test</directory>
+			<directory>src/test/resources</directory>
 		</fileSet>
 	
 		<fileSet filtered="false" packaged="false" encoding="UTF-8">
