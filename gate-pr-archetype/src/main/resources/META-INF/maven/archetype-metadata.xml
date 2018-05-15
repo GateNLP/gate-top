@@ -6,9 +6,7 @@
 
 	<requiredProperties>
 		<requiredProperty key="prClass" />
-		<requiredProperty key="prName">
-			<defaultValue>Example PR</defaultValue>
-		</requiredProperty>
+		<requiredProperty key="prName"/>
 		<requiredProperty key="prComment">
 			<defaultValue>(A short one-line description of this PR, suitable for a tooltip in the GUI)</defaultValue>
 		</requiredProperty>
