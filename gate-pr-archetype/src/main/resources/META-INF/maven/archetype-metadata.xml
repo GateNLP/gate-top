@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="gate-pr-archetype">
+
+	<requiredProperties>
+		<requiredProperty key="prClass" />
+		<requiredProperty key="prName">
+			<defaultValue>Example PR</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="prComment">
+			<defaultValue>(A short one-line description of this PR, suitable for a tooltip in the GUI)</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
+
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/test/java</directory>
+		</fileSet>
+
+		<fileSet filtered="false" packaged="false" encoding="UTF-8">
+			<directory>src/test/resources</directory>
+		</fileSet>
+	
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+		</fileSet>
+
+		<fileSet filtered="false" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources</directory>
+		</fileSet>
+	</fileSets>
+
+</archetype-descriptor>
