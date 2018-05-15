@@ -23,6 +23,7 @@
 	<modules>	 
 		<module>gate-maven-plugin</module>
 		<module>gate-plugin-archetype</module>
+		<module>gate-pr-archetype</module>
 		<module>gate-plugin-test-utils</module>
 		<module>gate-plugin-base</module>
 	</modules>
