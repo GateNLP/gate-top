@@ -6,6 +6,7 @@
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-archetype</artifactId>
 	<version>8.5-SNAPSHOT</version>
+	<packaging>maven-archetype</packaging>
 	
 	<name>GATE Plugin Archetype</name>
         <description>Maven archetype to create a new GATE plugin project.</description>
@@ -37,6 +38,16 @@
 		<developerConnection>scm:git:git@github.com:GateNLP/gate-top.git</developerConnection>
 		<url>https://github.com/GateNLP/gate-top</url>
 	</scm>
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>3.0.1</version>
+			</extension>
+		</extensions>
+	</build>
 
 	<distributionManagement>
 		<repository>
