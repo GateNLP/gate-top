@@ -17,6 +17,11 @@ public class Test${prClass} extends GATEPluginTests {
 
   @Test
   public void testSomething() {
-    // testing code goes here
+    AbstractLanguageAnalyser pr = Factory.createResource("${package}.${prClass}");
+    try {
+      // testing code goes here
+    } finally {
+      Factory.deleteResource(pr);
+    }
   }
 }
