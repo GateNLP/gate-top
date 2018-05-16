@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -40,8 +41,8 @@ import org.jdom.output.XMLOutputter;
 
 import gate.Gate;
 import gate.Gate.ResourceInfo;
-import gate.creole.Plugin;
 import gate.creole.CreoleAnnotationHandler;
+import gate.creole.Plugin;
 import gate.util.GateClassLoader;
 import gate.util.Strings;
 import gate.util.asm.ClassReader;
@@ -109,7 +110,7 @@ public class DumpCreoleToXML extends AbstractMojo {
           cl.addURL(artifact.getFile().toURI().toURL());
         }
       }
-
+      
       // Now create a plugin...
       Plugin plugin = new TargetPlugin(dir, project.getGroupId(),
           project.getArtifactId(), project.getVersion());
@@ -120,6 +121,17 @@ public class DumpCreoleToXML extends AbstractMojo {
 
       // get a handle on the existing creole.xml file
       Document creoleDoc = plugin.getCreoleXML();
+      
+      String creoleMinGate = creoleDoc.getRootElement().getAttributeValue("GATE-MIN");
+      if (creoleMinGate == null) {
+        for (Object obj : project.getDependencies()) {
+          Dependency effectiveDependency = (Dependency)obj;
+          if (effectiveDependency.getArtifactId().equals("gate-core")) {
+            creoleDoc.getRootElement().setAttribute("GATE-MIN",effectiveDependency.getVersion());
+            break;
+          }
+        }
+      }
 
       // process the java annotations to add them to the XML file
       annotationHandler.processAnnotations(creoleDoc);
