@@ -7,6 +7,7 @@
 		<groupId>uk.ac.gate</groupId>
 		<artifactId>gate-plugin-base</artifactId>
 		<!-- The version of GATE you wish to build against -->
+		<!-- note that this is also the earliest version of GATE which will load your plugin -->
 		<version>8.5-SNAPSHOT</version>
 		<!-- This forces the parent to always be resolved from the repo -->
 		<relativePath />
