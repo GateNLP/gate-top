@@ -127,10 +127,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>eu.openminted.share.annotations</groupId>
 				<artifactId>omtd-share-annotations-maven-plugin</artifactId>
 				<version>3.0.2.6</version>
+				<dependencies>
+				
+				</dependencies>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
@@ -145,6 +149,7 @@
 				</configuration>
 				<inherited>false</inherited>
 			</plugin>
+			-->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
