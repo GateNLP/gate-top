@@ -122,6 +122,17 @@ public class DumpCreoleToXML extends AbstractMojo {
       // get a handle on the existing creole.xml file
       Document creoleDoc = plugin.getCreoleXML();
       
+      if(project.getDescription() != null
+          && !project.getDescription().trim().equals(""))
+        creoleDoc.getRootElement().setAttribute("DESCRIPTION" ,project.getDescription());
+      
+      if(project.getName() != null && !project.getName().trim().equals(""))
+        creoleDoc.getRootElement().setAttribute("NAME",project.getName());
+      else
+        creoleDoc.getRootElement().setAttribute("NAME",project.getArtifactId());
+      
+      creoleDoc.getRootElement().setAttribute("VERSION", project.getVersion());
+      
       String creoleMinGate =
           creoleDoc.getRootElement().getAttributeValue("GATE-MIN");
       if(creoleMinGate == null) {
