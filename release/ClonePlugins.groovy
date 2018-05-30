@@ -35,7 +35,7 @@ plugins.each { pluginName ->
   println "cloning ${pluginName}"
   git.command(['git', 'clone', "git@github.com:GateNLP/${pluginName}.git".toString()])
   def gitProc = git.start()
-  git.waitFor()
+  gitProc.waitFor()
 }
 
 println "Writing aggregator POM"
