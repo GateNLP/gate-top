@@ -4,7 +4,7 @@
 
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-maven-plugin</artifactId>
-	<version>8.5-SNAPSHOT</version>
+	<version>8.6-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>GATE Maven Plugin</name>
@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
 			<artifactId>gate-core</artifactId>
-			<version>8.5-SNAPSHOT</version>
+			<version>8.6-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
