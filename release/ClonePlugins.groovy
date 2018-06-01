@@ -54,7 +54,7 @@ new File("pom.xml").withPrintWriter('UTF-8') { w ->
   <modules>
 """
   plugins.each { pluginName ->
-    w.println("    <module>$pluginName</module")
+    w.println("    <module>$pluginName</module>")
   }
   w << """\
   </modules>
