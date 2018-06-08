@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-base</artifactId>
-	<version>8.5</version>
+	<version>8.5.1</version>
 	<packaging>pom</packaging>
 
         <name>GATE Plugin Base</name>
@@ -49,14 +49,14 @@
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
 			<artifactId>gate-core</artifactId>
-			<version>8.5</version>
+			<version>8.5.1</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
 			<artifactId>gate-plugin-test-utils</artifactId>
-			<version>8.5</version>
+			<version>8.5.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -101,7 +101,7 @@
 			<plugin>
 				<groupId>uk.ac.gate</groupId>
 				<artifactId>gate-maven-plugin</artifactId>
-				<version>8.5</version>
+				<version>8.5.1</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>

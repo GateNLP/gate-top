@@ -3,6 +3,6 @@
 
 	<!-- plugins can require other plugins.
 	For example to require ANNIE you would include the following:
-	<REQUIRES GROUP="uk.ac.gate.plugins" ARTIFACT="annie" VERSION="8.5-SNAPSHOT"/>
+	<REQUIRES GROUP="uk.ac.gate.plugins" ARTIFACT="annie" VERSION="8.5"/>
 	-->
 </CREOLE-DIRECTORY>
