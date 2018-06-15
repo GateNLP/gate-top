@@ -134,7 +134,7 @@ public class GATEPluginTestCase extends TestCase {
 
 					String className = file.getAbsolutePath().substring(prefix);
 					className = className.substring(0, className.length() - 6)
-							.replace('/', '.');
+							.replace(File.separator, ".");
 
 					ClassReader classReader = new ClassReader(
 							new FileInputStream(file));
