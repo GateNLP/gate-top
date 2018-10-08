@@ -218,6 +218,8 @@
 						<!-- exclude auto-generated files -->
 						<exclude>**/svg/**/*</exclude>
 					</excludes>
+	
+					<maxHeap>1024</maxHeap>
 
 					<!-- for now ignore issues with default encoding -->
 					<omitVisitors>DefaultEncodingDetector</omitVisitors>
