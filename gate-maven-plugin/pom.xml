@@ -95,9 +95,9 @@
 		<plugins>
 			<plugin>
 				<!-- required to allow lambdas in gate-core -->
+                                <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.3</version>
-
+				<version>3.5</version>
 			</plugin>
 		</plugins>
 	</build>
