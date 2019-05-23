@@ -1,6 +1,8 @@
 package gate.test;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -10,7 +12,10 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 import gate.Factory;
+import gate.Gate;
 import gate.Resource;
+import gate.creole.Plugin;
+import gate.util.ant.packager.GappModel.MavenPlugin;
 import gate.util.persistence.PersistenceManager;
 
 public abstract class GappLoadingTestCase extends GATEPluginTestCase {
@@ -62,5 +67,19 @@ public abstract class GappLoadingTestCase extends GATEPluginTestCase {
 			}
 		});
 
+    try (PrintWriter out = new PrintWriter(new File(
+        gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(),
+        "required-plugins.txt"))) {
+      for(Plugin plugin : Gate.getCreoleRegister().getPlugins()) {
+        if(plugin instanceof Plugin.Maven) {
+          Plugin.Maven mavenPlugin = (Plugin.Maven)plugin;
+          out.println(mavenPlugin.getGroup() + ":" + mavenPlugin.getArtifact()
+              + ":" + mavenPlugin.getVersion());
+        } else {
+          out.println(plugin.getClass() + ": " + plugin.getName() + " "
+              + plugin.getVersion());
+        }
+      }
+    }
 	}
 }
