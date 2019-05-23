@@ -105,6 +105,8 @@ public class GATEPluginTestCase extends TestCase {
 
 			Element creoleRoot = jdomDoc.getRootElement();
 
+			creoleRoot.setAttribute("VERSION", getVersion());
+
 			Set<String> resources = new HashSet<String>();
 
 			String dir = creoleFile.getParent();
