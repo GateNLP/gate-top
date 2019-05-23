@@ -50,14 +50,6 @@
 			<version>4.11</version>
 		</dependency>
 	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>gate.ac.uk</id>
-			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
-		</repository>
-	</repositories>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>

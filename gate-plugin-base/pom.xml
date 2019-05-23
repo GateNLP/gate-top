@@ -63,22 +63,6 @@
 
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>gate.ac.uk</id>
-			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>gate.ac.uk</id>
-			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 		<testResources>
 			<!-- this adds the maven coordinates into the test resource file creole.properties 
