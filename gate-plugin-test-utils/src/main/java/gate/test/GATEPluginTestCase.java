@@ -38,12 +38,14 @@ import junit.framework.TestCase;
 
 public class GATEPluginTestCase extends TestCase {
 
+  protected Plugin.Maven pluginUnderTest = null;
+
   @Override
   public void setUp() throws Exception {
-    loadPlugin();
+    pluginUnderTest = loadPlugin();
   }
   
-	protected static void loadPlugin() throws Exception {
+	protected static Plugin.Maven loadPlugin() throws Exception {
 
 		if (!Gate.isInitialised()) {
 			Gate.runInSandbox(true);
@@ -62,7 +64,7 @@ public class GATEPluginTestCase extends TestCase {
 		InputStream propsStream = propsUrl.openStream();
 		properties.load(propsStream);
 
-		Plugin plugin = new PluginUnderTest(Files.fileFromURL(creoleUrl),
+		Plugin.Maven plugin = new PluginUnderTest(Files.fileFromURL(creoleUrl),
 				properties.getProperty("groupId"),
 				properties.getProperty("artifactId"),
 				properties.getProperty("version"));
@@ -70,6 +72,8 @@ public class GATEPluginTestCase extends TestCase {
 		if (!Gate.getCreoleRegister().getPlugins().contains(plugin)) {
 			Gate.getCreoleRegister().registerPlugin(plugin);
 		}
+
+		return plugin;
 	}
 
 	static class PluginUnderTest extends Plugin.Maven {
