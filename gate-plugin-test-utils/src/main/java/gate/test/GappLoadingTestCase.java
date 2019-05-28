@@ -34,39 +34,41 @@ public abstract class GappLoadingTestCase extends GATEPluginTestCase {
 		
 		Path pathInPlugin = Paths.get(resourcesURL.toURI());
 		
-		if (!Files.exists(pathInPlugin)) return;
+    if(Files.exists(pathInPlugin)) {
 
-		Files.walkFileTree(pathInPlugin, new SimpleFileVisitor<Path>() {
-			@Override
-			public FileVisitResult visitFile(Path filePath, BasicFileAttributes attrs) throws IOException {
+      Files.walkFileTree(pathInPlugin, new SimpleFileVisitor<Path>() {
+        @Override
+        public FileVisitResult visitFile(Path filePath,
+            BasicFileAttributes attrs) throws IOException {
 
-				String filename = filePath.getFileName().toString().toLowerCase();
-				if (filename.endsWith(".gapp") || filename.endsWith(".xgapp")) {
+          String filename = filePath.getFileName().toString().toLowerCase();
+          if(filename.endsWith(".gapp") || filename.endsWith(".xgapp")) {
 
-					boolean shouldTest = true;
-					for (String exclude : excluded) {
-						shouldTest &= !filePath.endsWith(exclude);
-					}
+            boolean shouldTest = true;
+            for(String exclude : excluded) {
+              shouldTest &= !filePath.endsWith(exclude);
+            }
 
-					if (shouldTest) {
-						System.out.println("Trying to load " + filePath);
-						Object obj = null;
-						try {
-							obj = PersistenceManager.loadObjectFromFile(filePath.toFile());
-						} catch (Exception e) {
-							throw new IOException(e);
-						} finally {
-							if (obj instanceof Resource) {
-								Factory.deleteResource((Resource) obj);
-							}
-						}
+            if(shouldTest) {
+              System.out.println("Trying to load " + filePath);
+              Object obj = null;
+              try {
+                obj = PersistenceManager.loadObjectFromFile(filePath.toFile());
+              } catch(Exception e) {
+                throw new IOException(e);
+              } finally {
+                if(obj instanceof Resource) {
+                  Factory.deleteResource((Resource)obj);
+                }
+              }
 
-					}
-				}
+            }
+          }
 
-				return FileVisitResult.CONTINUE;
-			}
-		});
+          return FileVisitResult.CONTINUE;
+        }
+      });
+    }
 
     // Having now loaded all the gapp files we'll dump out the list of loaded
     // plugins so that we can track the dependencies of this plugin. We actually
