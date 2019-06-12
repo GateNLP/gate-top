@@ -2,6 +2,6 @@
 
 A Maven archetype to generate a new GATE plugin project, including an example LanguageAnalyser PR class that you can modify.
 
-`mvn archetype:generate -DarchetypeGroupId=uk.ac.gate -DarchetypeArtifactId=gate-pr-archetype -DarchetypeVersion=8.6-SNAPSHOT`
+`mvn archetype:generate -DarchetypeGroupId=uk.ac.gate -DarchetypeArtifactId=gate-pr-archetype -DarchetypeVersion=8.7-SNAPSHOT`
 
 You will be prompted for all the required information by Maven.
