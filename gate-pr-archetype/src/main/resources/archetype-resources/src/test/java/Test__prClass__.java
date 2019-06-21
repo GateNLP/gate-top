@@ -2,6 +2,7 @@ package ${package};
 
 import gate.Factory;
 import gate.LanguageAnalyser;
+import gate.util.GateException;
 import gate.test.GATEPluginTests;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
 public class Test${prClass} extends GATEPluginTests {
 
   @Test
-  public void testSomething() {
+  public void testSomething() throws GateException {
     LanguageAnalyser pr = (LanguageAnalyser)Factory.createResource("${package}.${prClass}");
     try {
       // testing code goes here
