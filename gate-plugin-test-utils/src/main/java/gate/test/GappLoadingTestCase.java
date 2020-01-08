@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -31,140 +32,144 @@ public abstract class GappLoadingTestCase extends GATEPluginTestCase {
 
 		URL creoleURL = this.getClass().getResource("/creole.xml");
 		URL resourcesURL = new URL(creoleURL, "resources");
-		
+
 		Path pathInPlugin = Paths.get(resourcesURL.toURI());
-		
-    if(Files.exists(pathInPlugin)) {
 
-      Files.walkFileTree(pathInPlugin, new SimpleFileVisitor<Path>() {
-        @Override
-        public FileVisitResult visitFile(Path filePath,
-            BasicFileAttributes attrs) throws IOException {
+		Set<Plugin> initialPlugins = new HashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
+		Set<Plugin> loadedPlugins = new LinkedHashSet<Plugin>();
 
-          String filename = filePath.getFileName().toString().toLowerCase();
-          if(filename.endsWith(".gapp") || filename.endsWith(".xgapp")) {
+		if (Files.exists(pathInPlugin)) {
 
-            boolean shouldTest = true;
-            for(String exclude : excluded) {
-              shouldTest &= !filePath.endsWith(exclude);
-            }
+			Files.walkFileTree(pathInPlugin, new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path filePath, BasicFileAttributes attrs) throws IOException {
 
-            if(shouldTest) {
-              System.out.println("Trying to load " + filePath);
-              Object obj = null;
-              try {
-                obj = PersistenceManager.loadObjectFromFile(filePath.toFile());
-              } catch(Exception e) {
-                throw new IOException(e);
-              } finally {
-                if(obj instanceof Resource) {
-                  Factory.deleteResource((Resource)obj);
-                }
-              }
+					String filename = filePath.getFileName().toString().toLowerCase();
+					if (filename.endsWith(".gapp") || filename.endsWith(".xgapp")) {
 
-            }
-          }
+						boolean shouldTest = true;
+						for (String exclude : excluded) {
+							shouldTest &= !filePath.endsWith(exclude);
+						}
 
-          return FileVisitResult.CONTINUE;
-        }
-      });
-    }
+						if (shouldTest) {
+							System.out.println("Trying to load " + filePath);
+							Object obj = null;
+							try {
+								obj = PersistenceManager.loadObjectFromFile(filePath.toFile());
+								Set<Plugin> loadedByApp = new LinkedHashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
+								loadedByApp.removeAll(initialPlugins);
+								
+								for (Plugin plugin : loadedByApp) {
+									Gate.getCreoleRegister().unregisterPlugin(plugin);
+								}
+								
+								loadedPlugins.addAll(loadedByApp);
+								
+							} catch (Exception e) {
+								throw new IOException(e);
+							} finally {
+								if (obj instanceof Resource) {
+									Factory.deleteResource((Resource) obj);
+								}
+							}
 
-    // Having now loaded all the gapp files we'll dump out the list of loaded
-    // plugins so that we can track the dependencies of this plugin. We actually
-    // dump two versions. Firstly a plain text file that just lists the plugins,
-    // and then a DOT graph file that shows the dependency relations between the
-    // plugins
+						}
+					}
 
-    // Firstly we work out which plugins are root elements in the dependency
-    // graph, and at the same time produce the plain text version of the plugins
-    // list into target/creole-dependencies.txt
-    Set<Plugin> plugins =
-        new LinkedHashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		}
 
-    try (PrintWriter out = new PrintWriter(new File(
-        gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(),
-        "creole-dependencies.txt"))) {
+		// Having now loaded all the gapp files we'll dump out the list of loaded
+		// plugins so that we can track the dependencies of this plugin. We actually
+		// dump two versions. Firstly a plain text file that just lists the plugins,
+		// and then a DOT graph file that shows the dependency relations between the
+		// plugins
 
-      out.println(generatePluginLabel(pluginUnderTest));
-      for(Plugin plugin : Gate.getCreoleRegister().getPlugins()) {
+		// Firstly we work out which plugins are root elements in the dependency
+		// graph, and at the same time produce the plain text version of the plugins
+		// list into target/creole-dependencies.txt
+		Set<Plugin> plugins = new LinkedHashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
 
-        if(!plugin.equals(pluginUnderTest)) {
-          out.println(generatePluginLabel(plugin));
-        }
+		try (PrintWriter out = new PrintWriter(new File(
+				gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(), "creole-dependencies.txt"))) {
 
-        for(Plugin required : plugin.getRequiredPlugins()) {
-          plugins.remove(required);
-        }
-      }
-    }
+			out.println(generatePluginLabel(pluginUnderTest));
+			for (Plugin plugin : Gate.getCreoleRegister().getPlugins()) {
 
-    // we now loop through all the plugins that are root elements (i.e. they
-    // aren't required by another plugin so must be listed in a gapp file). In
-    // the output file actual dependencies between plugins are shown in red (r
-    // for required) whereas plugins loaded by an gapp (and not required by
-    // something else) are shown in green (g for gapp)
-    try (PrintWriter out = new PrintWriter(new File(
-        gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(),
-        "creole-dependencies.gv"))) {
+				if (!plugin.equals(pluginUnderTest)) {
+					out.println(generatePluginLabel(plugin));
+				}
 
-      out.println("digraph G {");
+				for (Plugin required : plugin.getRequiredPlugins()) {
+					plugins.remove(required);
+				}
+			}
+		}
 
-      out.println("   // ensure we always include this plugin even if no dependencies");
-      out.println("   \""+generatePluginLabel(pluginUnderTest)+"\"\n");
+		// we now loop through all the plugins that are root elements (i.e. they
+		// aren't required by another plugin so must be listed in a gapp file). In
+		// the output file actual dependencies between plugins are shown in red (r
+		// for required) whereas plugins loaded by an gapp (and not required by
+		// something else) are shown in green (g for gapp)
+		try (PrintWriter out = new PrintWriter(new File(
+				gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(), "creole-dependencies.gv"))) {
 
-      for(Plugin plugin : plugins) {
+			out.println("digraph G {");
 
-        dumpPluginHierarchy(out, plugin, "[color=red]");
+			out.println("   // ensure we always include this plugin even if no dependencies");
+			out.println("   \"" + generatePluginLabel(pluginUnderTest) + "\"\n");
 
-        if(!plugin.equals(pluginUnderTest)) {
-          StringBuilder builder = new StringBuilder();
-          builder.append("   \"").append(generatePluginLabel(pluginUnderTest))
-              .append("\" -> \"").append(generatePluginLabel(plugin))
-              .append("\" [color=green]\n");
+			for (Plugin plugin : plugins) {
 
-          out.println(builder.toString());
-        }
-      }
+				dumpPluginHierarchy(out, plugin, "[color=red]");
 
-      out.println("}");
-    }
-  }
+				if (!plugin.equals(pluginUnderTest)) {
+					StringBuilder builder = new StringBuilder();
+					builder.append("   \"").append(generatePluginLabel(pluginUnderTest)).append("\" -> \"")
+							.append(generatePluginLabel(plugin)).append("\" [color=green]\n");
 
-  /**
-   * Util method for recursively following the required links through a sequence
-   * of plugins
-   */
-  private static void dumpPluginHierarchy(PrintWriter out, Plugin plugin,
-      String formatting) {
-    StringBuilder builder = new StringBuilder();
-    for(Plugin required : plugin.getRequiredPlugins()) {
-      builder.append("   \"").append(generatePluginLabel(plugin))
-          .append("\" -> \"").append(generatePluginLabel(required))
-          .append("\"");
-      if(formatting != null && !formatting.isEmpty())
-        builder.append(" ").append(formatting);
-      builder.append("\n");
-    }
+					out.println(builder.toString());
+				}
+			}
 
-    out.print(builder.toString());
-  }
+			out.println("}");
+		}
+	}
 
-  /**
-   * Util method to build a textual label for a given plugin
-   */
-  private static String generatePluginLabel(Plugin plugin) {
-    StringBuilder builder = new StringBuilder();
-    if(plugin instanceof Plugin.Maven) {
-      Plugin.Maven mavenPlugin = (Plugin.Maven)plugin;
-      builder.append(mavenPlugin.getGroup()).append(":")
-          .append(mavenPlugin.getArtifact()).append(":")
-          .append(mavenPlugin.getVersion());
-    } else {
-      builder.append(plugin.getClass()).append(":").append(plugin.getName())
-          .append(":").append(plugin.getVersion());
-    }
+	/**
+	 * Util method for recursively following the required links through a sequence
+	 * of plugins
+	 */
+	private static void dumpPluginHierarchy(PrintWriter out, Plugin plugin, String formatting) {
+		StringBuilder builder = new StringBuilder();
+		for (Plugin required : plugin.getRequiredPlugins()) {
+			builder.append("   \"").append(generatePluginLabel(plugin)).append("\" -> \"")
+					.append(generatePluginLabel(required)).append("\"");
+			if (formatting != null && !formatting.isEmpty())
+				builder.append(" ").append(formatting);
+			builder.append("\n");
+		}
 
-    return builder.toString();
-  }
+		out.print(builder.toString());
+	}
+
+	/**
+	 * Util method to build a textual label for a given plugin
+	 */
+	private static String generatePluginLabel(Plugin plugin) {
+		StringBuilder builder = new StringBuilder();
+		if (plugin instanceof Plugin.Maven) {
+			Plugin.Maven mavenPlugin = (Plugin.Maven) plugin;
+			builder.append(mavenPlugin.getGroup()).append(":").append(mavenPlugin.getArtifact()).append(":")
+					.append(mavenPlugin.getVersion());
+		} else {
+			builder.append(plugin.getClass()).append(":").append(plugin.getName()).append(":")
+					.append(plugin.getVersion());
+		}
+
+		return builder.toString();
+	}
 }
