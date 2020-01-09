@@ -120,7 +120,7 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-									<version>3.5.2</version>
+									<version>3.6.0</version>
 								</requireMavenVersion>
 							</rules>
 						</configuration>
@@ -215,6 +215,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.8.2</version>
+            </plugin>
 		</plugins>
 	</build>
 
