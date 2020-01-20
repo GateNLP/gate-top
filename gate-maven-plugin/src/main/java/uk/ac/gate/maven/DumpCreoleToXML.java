@@ -101,7 +101,15 @@ public class DumpCreoleToXML extends AbstractMojo {
       for(Artifact artifact : (Set<Artifact>)project.getArtifacts()) {
         // for each dependency of the plugin try and get a URL to it's jar file
         // and add that to the classloader
-        
+
+        // turns out we've always been accidentally adding gate-core at this
+        // point when we shouldn't have been. Prior to 9.0-SNAPSHOT, however,
+        // the logging was broken so the warning messages were not appearing.
+        // Having changed the logging in 9.0-SNAPSHOT the warnings appeared and
+        // leading us to adding this fix
+        if (Artifact.SCOPE_PROVIDED.equals(artifact.getScope())) continue;
+        if (Artifact.SCOPE_TEST.equals(artifact.getScope())) continue;
+
         //if this doesn't work in all cases try
         //http://aether.jcabi.com/example-classpath.html
 
@@ -122,6 +130,13 @@ public class DumpCreoleToXML extends AbstractMojo {
       // get a handle on the existing creole.xml file
       Document creoleDoc = plugin.getCreoleXML();
       
+      // as part of the fix to stop loading gate-core we also need to ensure
+      // that we load all the required plugins we need before we try and
+      // build up the CREOLE metadata for the resources in this plugin
+      for (Plugin required : plugin.getRequiredPlugins()) {
+        Gate.getCreoleRegister().registerPlugin(required);
+      }
+
       if(project.getDescription() != null
           && !project.getDescription().trim().equals(""))
         creoleDoc.getRootElement().setAttribute("DESCRIPTION" ,project.getDescription());
