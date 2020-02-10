@@ -35,7 +35,7 @@ public abstract class GappLoadingTestCase extends GATEPluginTestCase {
 
 		Path pathInPlugin = Paths.get(resourcesURL.toURI());
 
-		Set<Plugin> initialPlugins = new HashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
+		Set<Plugin> initialPlugins = new LinkedHashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
 		Set<Plugin> loadedPlugins = new LinkedHashSet<Plugin>();
 
 		if (Files.exists(pathInPlugin)) {
@@ -91,13 +91,15 @@ public abstract class GappLoadingTestCase extends GATEPluginTestCase {
 		// Firstly we work out which plugins are root elements in the dependency
 		// graph, and at the same time produce the plain text version of the plugins
 		// list into target/creole-dependencies.txt
-		Set<Plugin> plugins = new LinkedHashSet<Plugin>(Gate.getCreoleRegister().getPlugins());
+		initialPlugins.addAll(loadedPlugins);	
+		Set<Plugin> plugins = new LinkedHashSet<Plugin>(initialPlugins);
+		
 
 		try (PrintWriter out = new PrintWriter(new File(
 				gate.util.Files.fileFromURL(creoleURL).getParentFile().getParentFile(), "creole-dependencies.txt"))) {
-
+			
 			out.println(generatePluginLabel(pluginUnderTest));
-			for (Plugin plugin : Gate.getCreoleRegister().getPlugins()) {
+			for (Plugin plugin : initialPlugins) {
 
 				if (!plugin.equals(pluginUnderTest)) {
 					out.println(generatePluginLabel(plugin));
