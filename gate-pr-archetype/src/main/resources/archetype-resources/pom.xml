@@ -21,18 +21,16 @@
 	<!-- Information about this plugin. This will be used when the plugin is 
 		shown in the GATE plugin manager -->
 
-	<!-- Uncomment this to add a descriptive short name of the plugin -->
-        <!--
-	<name></name>
-        -->
+	<!-- a descriptive short name of the plugin -->
+	<name> </name>
 
 	<!-- Add a description of what the plugin does or can be used for. Do not 
 		include the list of processing or language resources, this will be determined 
 		automatically. About one or two paragraphs. -->
-	<description></description>
+	<description> </description>
 
 	<!-- Add the URL of the plugin's user-oriented web page -->
-	<url></url>
+	<url> </url>
 
 	<licenses>
 		<license>
