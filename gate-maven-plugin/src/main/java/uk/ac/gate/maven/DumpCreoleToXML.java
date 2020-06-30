@@ -129,13 +129,6 @@ public class DumpCreoleToXML extends AbstractMojo {
 
       // get a handle on the existing creole.xml file
       Document creoleDoc = plugin.getCreoleXML();
-      
-      // as part of the fix to stop loading gate-core we also need to ensure
-      // that we load all the required plugins we need before we try and
-      // build up the CREOLE metadata for the resources in this plugin
-      for (Plugin required : plugin.getRequiredPlugins()) {
-        Gate.getCreoleRegister().registerPlugin(required);
-      }
 
       if(project.getDescription() != null
           && !project.getDescription().trim().equals(""))
@@ -160,6 +153,13 @@ public class DumpCreoleToXML extends AbstractMojo {
             break;
           }
         }
+      }
+
+      // as part of the fix to stop loading gate-core we also need to ensure
+      // that we load all the required plugins we need before we try and
+      // build up the CREOLE metadata for the resources in this plugin
+      for (Plugin required : plugin.getRequiredPlugins()) {
+        Gate.getCreoleRegister().registerPlugin(required);
       }
 
       // process the java annotations to add them to the XML file
@@ -188,6 +188,11 @@ public class DumpCreoleToXML extends AbstractMojo {
 
     private File creoleFile;
 
+    /**
+     * The parsed creole.xml file.
+     */
+    private Document parsedCreoleXml;
+
     public TargetPlugin(File dir, String group, String artifact, String version)
         throws MalformedURLException {
       super(group, artifact, version);
@@ -196,41 +201,52 @@ public class DumpCreoleToXML extends AbstractMojo {
       this.creoleFile = new File(dir, "creole.xml");
     }
 
+    /**
+     * Trick to make sure that when we get the dependencies of this plugin we are
+     * getting them from the creole.xml we're currently processing, and not from the
+     * expanded one in a creole.jar from a previous plugin build.
+     */
+    @Override
+    public Document getMetadataXML() throws Exception {
+      return getCreoleXML();
+    }
+
     @Override
     public Document getCreoleXML() throws Exception {
-      // load the existing creole.xml file into memory
-      SAXBuilder builder = new SAXBuilder(false);
-      Document jdomDoc = builder.build(new FileInputStream(creoleFile),
-          getBaseURL().toExternalForm());
-      Element creoleRoot = jdomDoc.getRootElement();
+      if(parsedCreoleXml == null) {
+        // load the existing creole.xml file into memory
+        SAXBuilder builder = new SAXBuilder(false);
+        parsedCreoleXml = builder.build(new FileInputStream(creoleFile),
+                getBaseURL().toExternalForm());
+        Element creoleRoot = parsedCreoleXml.getRootElement();
 
-      // add a comment to make it clear the expanded version is just for info
-      Comment comment = new Comment(
-          "this file is auto-generated, modifications will have no effect");
-      creoleRoot.addContent(0, comment);
+        // add a comment to make it clear the expanded version is just for info
+        Comment comment = new Comment(
+                "this file is auto-generated, modifications will have no effect");
+        creoleRoot.addContent(0, comment);
 
-      // get the full directory path, ending with a separator
-      String dir = creoleFile.getParent();
-      if(!dir.endsWith(File.separator)) dir = dir + File.separator;
+        // get the full directory path, ending with a separator
+        String dir = creoleFile.getParent();
+        if(!dir.endsWith(File.separator)) dir = dir + File.separator;
 
-      // recurse trhough the folder finding all the creole resources
-      Set<String> resources = new HashSet<String>();
-      scanDir(dir.length(), creoleFile.getParentFile(), resources);
+        // recurse trhough the folder finding all the creole resources
+        Set<String> resources = new HashSet<String>();
+        scanDir(dir.length(), creoleFile.getParentFile(), resources);
 
-      for(String resource : resources) {
-        // for each creole resource...
+        for(String resource : resources) {
+          // for each creole resource...
 
-        // create a new entry in the XML file so that we know which classes to
-        // scan for further information
-        Element resourceElement = new Element("RESOURCE");
-        Element classElement = new Element("CLASS");
-        classElement.setText(resource);
-        resourceElement.addContent(classElement);
-        creoleRoot.addContent(resourceElement);
+          // create a new entry in the XML file so that we know which classes to
+          // scan for further information
+          Element resourceElement = new Element("RESOURCE");
+          Element classElement = new Element("CLASS");
+          classElement.setText(resource);
+          resourceElement.addContent(classElement);
+          creoleRoot.addContent(resourceElement);
+        }
       }
-      
       //return the part expanded creole.xml file
-      return jdomDoc;
+      return parsedCreoleXml;
     }
 
     /**
