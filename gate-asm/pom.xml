@@ -5,12 +5,13 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<asm.version>9.0</asm.version>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-asm</artifactId>
-	<version>6.1.1</version>
+	<version>${asm.version}</version>
 
         <name>ASM bytecode library (repackaged)</name>
         <description>A shaded copy of ASM 6.1.1, relocated into a GATE-specific package name.</description>
@@ -46,7 +47,7 @@
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
-			<version>6.1.1</version>
+			<version>${asm.version}</version>
 		</dependency>
 	</dependencies>
 
