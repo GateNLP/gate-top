@@ -14,7 +14,7 @@
 	<version>${asm.version}</version>
 
         <name>ASM bytecode library (repackaged)</name>
-        <description>A shaded copy of ASM 6.1.1, relocated into a GATE-specific package name.</description>
+        <description>A shaded copy of ASM ${asm.version}, relocated into a GATE-specific package name.</description>
         <url>https://gate.ac.uk/</url>
 	
 	<licenses>
