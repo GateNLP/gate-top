@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<ecj.version>3.24.0</ecj.version>
+	</properties>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>uk.ac.gate</groupId>
+	<artifactId>gate-compiler-jdt</artifactId>
+	<version>${ecj.version}</version>
+
+        <name>Repackaged version of the Eclipse JDT compiler for GATE</name>
+        <description>A shaded copy of Eclipse JDT Compilee ${ecj.version}, relocated into a GATE-specific package name.</description>
+        <url>https://gate.ac.uk/</url>
+	
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 2.0</name>
+			<url>ttps://www.eclipse.org/legal/epl-2.0/</url>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>GATE</name>
+		<url>http://gate.ac.uk</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>gate-team</id>
+			<name>GATE Team</name>
+			<email>gate-developers@lists.sourceforge.net</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/GateNLP/gate-top.git</connection>
+		<developerConnection>scm:git:git@github.com:GateNLP/gate-top.git</developerConnection>
+		<url>https://github.com/GateNLP/gate-top</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>ecj</artifactId>
+			<version>${ecj.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<relocations>
+						<relocation>
+							<pattern>org.eclipse.jdt</pattern>
+							<shadedPattern>gate.util.compilers.eclipse.jdt</shadedPattern>
+						</relocation>
+					</relocations>
+					<createSourcesJar>true</createSourcesJar>
+					<shadeSourcesContent>true</shadeSourcesContent>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>javadoc</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>gate-oss</id>
+			<name>Sonatype OSS staging</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<id>gate.snapshots</id>
+			<name>GATE Snapshots Repository</name>
+			<url>http://repo.gate.ac.uk/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>gpg-sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
