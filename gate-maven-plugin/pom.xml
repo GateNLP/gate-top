@@ -4,7 +4,7 @@
 
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-maven-plugin</artifactId>
-	<version>9.0-SNAPSHOT</version>
+	<version>9.0</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>GATE Maven Plugin</name>

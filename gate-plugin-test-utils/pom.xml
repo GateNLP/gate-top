@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.gate</groupId>
 	<artifactId>gate-plugin-test-utils</artifactId>
-	<version>9.0-SNAPSHOT</version>
+	<version>9.0</version>
 
         <name>GATE plugin testing utilities</name>
         <description>A set of utilities to assist in testing GATE plugins.</description>
@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>uk.ac.gate</groupId>	
 			<artifactId>gate-core</artifactId>
-			<version>9.0-SNAPSHOT</version>
+			<version>9.0</version>
 			<scope>provided</scope>
 		</dependency>
 
