@@ -8,7 +8,7 @@
 		<artifactId>gate-plugin-base</artifactId>
 		<!-- The version of GATE you wish to build against -->
 		<!-- note that this is also the earliest version of GATE which will load your plugin -->
-		<version>9.0-SNAPSHOT</version>
+		<version>£{project.version}</version>
 		<!-- This forces the parent to always be resolved from the repo -->
 		<relativePath />
 	</parent>

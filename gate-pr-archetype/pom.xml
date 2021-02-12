@@ -2,17 +2,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>uk.ac.gate</groupId>
+
 	<artifactId>gate-pr-archetype</artifactId>
-	<version>9.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
-	
+
+	<parent>
+		<groupId>uk.ac.gate</groupId>
+		<artifactId>gate-top</artifactId>
+		<version>${revision}</version>
+	</parent>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
-	<name>GATE Plugin Archetype</name>
+	<name>GATE Plugin with PR Archetype</name>
         <description>Maven archetype to create a new GATE plugin project including a sample PR class (an empty LanguageAnalyser).</description>
 	<url>http://gate.ac.uk/</url>
 
@@ -74,10 +78,22 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.8.2</version>
-            </plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
+					<delimiters>
+						<delimiter>£{*}</delimiter>
+					</delimiters>
+				</configuration>
+			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 	<distributionManagement>
