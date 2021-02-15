@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>uk.ac.gate</groupId>
 			<artifactId>gate-plugin-test-utils</artifactId>
-			<version>${project.version}</version>
+			<version>${revision}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -146,7 +146,7 @@
 			<plugin>
 				<groupId>uk.ac.gate</groupId>
 				<artifactId>gate-maven-plugin</artifactId>
-				<version>${project.version}</version>
+				<version>${revision}</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
@@ -159,7 +159,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>0.8.6</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
