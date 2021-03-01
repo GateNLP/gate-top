@@ -12,3 +12,4 @@ buildNumber.properties
 .project
 .settings/
 .flattened-pom.xml
+.ci-friendly-pom.xml
