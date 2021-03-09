@@ -14,6 +14,24 @@
 		<revision>9.1-SNAPSHOT</revision>
 	</properties>
 
+	<name>GATE Top</name>
+	<description>GATE Top is a convenience repo for building GATE and associated projects. Mainly for use with a CI server.</description>
+	<url>http://gate.ac.uk/</url>
+
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License (LGPL), Version 3</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git://github.com/GateNLP/gate-top.git</connection>
+		<developerConnection>scm:git:git@github.com:GateNLP/gate-top.git</developerConnection>
+		<url>https://github.com/GateNLP/gate-top</url>
+	</scm>
+
 	<organization>
 		<name>GATE</name>
 		<url>http://gate.ac.uk</url>
