@@ -71,7 +71,7 @@
 		<repository>
 			<id>gate.ac.uk</id>
 			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
+			<url>https://repo.gate.ac.uk/content/groups/public/</url>
 		</repository>
 	</repositories>
 
@@ -79,7 +79,7 @@
 		<pluginRepository>
 			<id>gate.ac.uk</id>
 			<name>GATE Development Repository</name>
-			<url>http://repo.gate.ac.uk/content/groups/public/</url>
+			<url>https://repo.gate.ac.uk/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
