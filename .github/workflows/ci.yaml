@@ -7,7 +7,7 @@ on:
       - master
 
   # Also allow direct triggering, typically following a build of gate-core
-  workflow-dispatch:
+  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
