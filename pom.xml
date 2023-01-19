@@ -66,6 +66,10 @@
 			<url>https://repo.gate.ac.uk/content/repositories/snapshots</url>
 			<layout>default</layout>
 		</snapshotRepository>
+		<site>
+			<id>gate-top</id>
+			<url>https://gatenlp.github.io/gate-top/</url>
+		</site>
 	</distributionManagement>
 
 	<build>
@@ -111,6 +115,24 @@
 		</plugins>
 	</build>
 
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+        
 	<profiles>
 		<profile>
 			<id>gpg-sign</id>

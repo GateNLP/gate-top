@@ -92,13 +92,13 @@ jobs:
           fail_if_no_tests: false
           
       - name: Build site
-        run: mvn --batch-mode -e -DskipTests site
+        run: mvn --batch-mode -e -DskipTests site site:stage
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'target/site'
+          path: 'target/staging'
 
       - name: Deploy to repo.gate.ac.uk
         run: mvn --batch-mode -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
