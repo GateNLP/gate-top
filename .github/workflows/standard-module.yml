@@ -50,7 +50,8 @@ jobs:
           cache: maven
 
       # Override http://repo.gate.ac.uk to use https:// instead
-      - uses: whelk-io/maven-settings-xml-action@v20
+      - name: Configure Maven settings
+        uses: whelk-io/maven-settings-xml-action@v20
         with:
           mirrors: >
             [
