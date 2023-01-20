@@ -120,7 +120,7 @@ jobs:
 
       - name: Deploy to repo.gate.ac.uk
         if: github.ref == inputs.default_branch
-        run: mvn -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
+        run: mvn --batch-mode -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
 
   publish-site:
     if: github.ref == inputs.default_branch
