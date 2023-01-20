@@ -19,8 +19,8 @@ on:
         required: false
         type: boolean
       default_branch:
-        description: "Name of the default branch of the calling repository, if not master"
-        default: "master"
+        description: "Full refs/heads/XXX of the default branch of the calling repository, if not master"
+        default: "refs/heads/master"
         required: false
         type: string
 
