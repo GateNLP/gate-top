@@ -113,6 +113,13 @@ jobs:
         if: github.repository == 'GateNLP/gate-top' && github.ref == 'refs/heads/master'
         run: mvn --batch-mode -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
 
+      # We want to avoid cacheing -SNAPSHOT dependencies from our local maven
+      # cache, to ensure that we always go out and check for them again at the
+      # next build in case they have changed.
+      - name: Delete snapshots from m2 repository
+        if: always()
+        run: |
+          find ~/.m2/repository -name \*-SNAPSHOT -type d -exec rm -rf {} \+ || :
 
       - name: Deploy site to GitHub Pages
         if: env.GITHUB_PAGES == 'true'
