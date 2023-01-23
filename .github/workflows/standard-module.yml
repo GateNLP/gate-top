@@ -28,6 +28,11 @@ on:
         default: true
         required: false
         type: boolean
+      fetch_depth:
+        description: "By default we do a shallow clone of the repository, to instead do a full clone set fetch_depth: '0'"
+        default: "1"
+        required: false
+        type: string
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -43,6 +48,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: ${{ inputs.fetch_depth }}
 
       - name: Setup Pages
         if: inputs.deploy_site_to_pages
