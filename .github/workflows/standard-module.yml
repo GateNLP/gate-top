@@ -51,6 +51,14 @@ jobs:
         with:
           fetch-depth: ${{ inputs.fetch_depth }}
 
+      - name: Update submodules if necessary
+        run: |
+          if [ -f '.gitmodules' ]; then
+            git submodule update --init --recursive --depth=1
+          else
+            echo "Repository does not have submodules - nothing to do"
+          fi
+
       - name: Setup Pages
         if: inputs.deploy_site_to_pages
         uses: actions/configure-pages@v2

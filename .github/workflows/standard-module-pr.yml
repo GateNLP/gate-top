@@ -27,6 +27,14 @@ jobs:
       - name: Checkout PR
         uses: actions/checkout@v3
 
+      - name: Update submodules if necessary
+        run: |
+          if [ -f '.gitmodules' ]; then
+            git submodule update --init --recursive --depth=1
+          else
+            echo "Repository does not have submodules - nothing to do"
+          fi
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
