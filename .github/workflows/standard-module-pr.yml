@@ -18,6 +18,11 @@ on:
         default: true
         required: false
         type: boolean
+      maven_version:
+        description: "Version of Maven to use for the build"
+        default: "3.8.8"
+        required: false
+        type: string
 
 jobs:
   build:
@@ -41,6 +46,11 @@ jobs:
           java-version: ${{ inputs.java_version }}
           distribution: ${{ inputs.java_distribution }}
           cache: maven
+
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: ${{ inputs.maven_version }}
 
       # Override http://repo.gate.ac.uk to use https:// instead
       - name: Configure Maven settings
