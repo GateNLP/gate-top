@@ -151,7 +151,7 @@ jobs:
 
       - name: Upload artifact
         if: github.ref == inputs.default_branch && env.GITHUB_PAGES == 'true'
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: 'target/site'
@@ -173,4 +173,4 @@ jobs:
       - name: Deploy site to GitHub Pages
         if: github.ref == inputs.default_branch && env.GITHUB_PAGES == 'true'
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
