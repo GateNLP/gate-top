@@ -48,13 +48,13 @@ jobs:
           cache: maven
 
       - name: Set up Maven
-        uses: stCarolas/setup-maven@v4.5
+        uses: stCarolas/setup-maven@v5
         with:
           maven-version: ${{ inputs.maven_version }}
 
       # Override http://repo.gate.ac.uk to use https:// instead
       - name: Configure Maven settings
-        uses: whelk-io/maven-settings-xml-action@v21
+        uses: whelk-io/maven-settings-xml-action@v22
         with:
           mirrors: >
             [
